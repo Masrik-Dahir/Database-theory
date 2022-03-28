@@ -1,4 +1,4 @@
--- Create Table statement [20 Exercises]
+-- Create Table statement
 ---------------------------------------------------START--------------------------------------------------------
 -- 1. Write a SQL statement to create a simple
 -- table countries including columns country_id,
@@ -146,7 +146,7 @@ CREATE TABLE IF NOT EXISTS employees (
 
 ------------------------------------------------------END--------------------------------------------------------------
 
--- Insert Into statement [14 Exercises]
+-- Insert Into statement
 -------------------------------------------------------START-------------------------------------------------------------------------------
 
 -- 1. Write a SQL statement to insert a record with your own value into the table countries against each columns.
@@ -200,7 +200,7 @@ INSERT INTO countries VALUES(
 
 ----------------------------------------------END---------------------------------------------------------------------------------
 
--- Update Table statement [9 Exercises]
+-- Update Table statement
 -----------------------------------------------START--------------------------------------------------------------------------------
 
 -- 1. Write a SQL statement to change the email column of employees table with 'not available' for all employees.
@@ -276,7 +276,7 @@ WHERE job_id = 'PU_CLERK';
 
 ---------------------------------------------END----------------------------------------------------------------------------------------
 
--- MySQL Alter Table [15 exercises with solution]
+-- Alter Table statement 
 ----------------------------------------------START---------------------------------------------------------------------------------------
 
 -- 1. Write a SQL statement to rename the table countries to country_new.
@@ -345,7 +345,7 @@ DROP INDEX indx_job_id;
 
 --------------------------------------------END------------------------------------------------------------------------------------
 
--- Basic SELECT statement [19 exercises with solution]
+-- Basic SELECT statement
 --------------------------------------------START---------------------------------------------------------------------------------------
 
 -- 1. Write a query to display the names (first_name, last_name) using alias name “First Name", "Last Name"
@@ -431,7 +431,7 @@ FROM employees;
 
 -----------------------------------------------END------------------------------------------------------------------------------------
 
--- MySQL Restricting and Sorting data: [11 exercises with solution]
+-- Restricting and Sorting data
 ------------------------------------------------START-----------------------------------------------------------------------------------
 
 -- 1. Write a query to display the name (first_name, last_name) and salary for all employees whose
@@ -497,7 +497,7 @@ WHERE last_name in ('BLAKE', 'SCOTT', 'KING', 'FORD');
 
 ------------------------------------------------------------------------------------------------------------------------------------------
 
--- MySQL Aggregate Functions and Group by- Exercises, Practice, Solution
+-- Aggregate Functions and Group by
 ------------------------------------------------------------------------------------------------------------------------------------------
 
 -- 1. Write a query to list the number of jobs available in the employees table
@@ -579,7 +579,7 @@ HAVING COUNT(DISTINCT employee_id) > 10;
 
 --------------------------------------------------END-----------------------------------------------
 
--- MySQL Subquery - Exercises, Practice, Solution
+-- Subquery
 --------------------------------------------------START-----------------------------------------------
 
 -- 1. Write a query to find the name (first_name, last_name) and the salary
@@ -635,4 +635,191 @@ WHERE salary > (
 
 -- 6. Write a query to find the name (first_name, last_name), and salary of the employees whose salary 
 -- is equal to the minimum salary for their job grade.
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary = (
+  SELECT MIN_SALARY 
+  FROM jobs
+  WHERE employees.job_id = jobs.job_id
+);
 
+-- 7. Write a query to find the name (first_name, last_name), and salary of the employees who earns more 
+-- than the average salary and works in any of the IT departments.
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary > (
+  SELECT AVG(salary)
+  FROM employees
+) AND department_id IN (
+  SELECT department_id 
+  FROM jobs
+  WHERE department_name LIKE 'IT %'
+);
+
+-- 8. Write a query to find the name (first_name, last_name), and salary of the employees 
+-- who earns more than the earning of Mr. Bell.
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary > (
+  SELECT salary 
+  FROM employees
+  WHERE last_name = 'BELL'
+)
+ORDER BY first_name;
+
+-- 9. Write a query to find the name (first_name, last_name), and salary of the employees 
+-- who earn the same salary as the minimum salary for all departments
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary IN (
+  SELECT MIN(salary) 
+  FROM employees
+  GROUP BY department_id
+)
+ORDER BY first_name;
+
+-- 10. Write a query to find the name (first_name, last_name), and salary of the employees 
+-- whose salary is greater than the average salary of all departments.
+SELECT first_name, last_name, salary
+FROM employees
+WHERE salary IN (
+  SELECT AVG(salary) 
+  FROM employees
+  GROUP BY department_id
+)
+ORDER BY first_name;
+
+------------------------------------------END----------------------------------------------------------------------------
+
+-- JOINS
+------------------------------------------START--------------------------------------------------------------------------
+
+-- 1. Write a query to find the addresses (location_id, street_address, city, 
+-- state_province, country_name) of all the departments.
+SELECT location_id, street_address, city, state_province, country_name
+FROM locations JOIN countries
+USING (country_id);
+
+-- 2. Write a query to find the name (first_name, last name), department ID 
+-- and name of all the employees.
+SELECT first_name, last_name, department_id, department_name
+FROM employees JOIN departments
+USING (department_id);
+
+-- 3. Write a query to find the name (first_name, last_name), job, department ID 
+-- and name of the employees who works in London.
+SELECT first_name, last_name, job_id, department_id, department_name
+FROM employees JOIN departments
+USING (department_id)
+JOIN locations
+USING (location_id)
+WHERE locations.city = 'London';
+
+-- 4. Write a query to find the employee id, name (last_name) along with their manager_id and name (last_name).
+SELECT e.employee_id, e.last_name, m.employee_id, m.last_name
+FROM employees e JOIN employee m
+ON (e.manager_id = m.employee_id);
+
+-- 5. Write a query to find the name (first_name, last_name) and hire date of the employees who was hired after 'Jones'.
+SELECT e.first_name, e.last_name, e.hire_date
+FROM employees e JOIN employee jone
+ON (jone.last_name = 'Jones')
+WHERE e.hire_date > jone.hire_date;
+
+------------------------------------------END--------------------------------------------------------------------------------------------------------------
+
+-- Date Time
+------------------------------------------START------------------------------------------------------------------------------------------------------------
+
+-- Write a query to display the first day of the month (in datetime format) three months before the current month
+SELECT DATE(
+  (
+    (PERIOD_ADD
+      (EXTRACT
+        (YEAR_MONTH FROM CURDATE()
+        ),-3
+      )*100
+    )+1)
+  );
+
+-- 2. Write a query to display the last day of the month (in datetime format) three months before the current month.
+SELECT (
+  SUBDATE(
+    ADDDATE(
+      CURDATE(),INTERVAL 1 MONTH),
+         INTERVAL DAYOFMONTH(
+           CURDATE())
+           DAY)) 
+  AS LastDayOfTheMonth;
+
+
+-- 3. Write a query to get the distinct Mondays from hire_date in employees tables. 
+SELECT DISTINCT(STR_TO_DATE
+     (CONCAT(YEARWEEK(hire_date),'1'),'%x%v%w')) 
+          FROM employees;
+
+-- 4. Write a query to get the first day of the current year.
+SELECT MAKEDATE(EXTRACT(YEAR FROM CURDATE()),1);
+
+-- 5. Write a query to get the last day of the current year.
+SELECT STR_TO_DATE(CONCAT(12,31,
+      EXTRACT(YEAR FROM CURDATE())), '%m%d%Y');
+
+-- 6. Write a query to calculate the age in year.
+SELECT YEAR(CURRENT_TIMESTAMP) - 
+         YEAR("1967-06-08") - 
+             (RIGHT(CURRENT_TIMESTAMP, 5) < 
+                  RIGHT("1967-06-08", 5)) as age;
+
+-- 7. Write a query to get the current date in the following format.
+-- Sample date : 2014-09-04
+-- Output : September 4, 2014
+SELECT DATE_FORMAT(CURDATE(),'%M %e, %Y') 
+   AS 'Current_date';
+
+-- 8. Write a query to get the current date in Thursday September 2014 format.
+SELECT DATE_FORMAT(NOW(), '%W %M %Y');
+
+-- 9. Write a query to extract the year from the current date.
+SELECT EXTRACT(YEAR FROM  NOW());
+
+--------------------------------------------END-----------------------------------------------------------------------------------------------------------------------------
+
+-- String Functions
+--------------------------------------------START---------------------------------------------------------------------------------------------------------------------------
+
+-- 1. Write a query to get the job_id and related employee's id.
+SELECT job_id, GROUP_CONCAT(employee_id, ' ')
+FROM employees
+GROUP BY job_id;
+
+-- 2. Write a query to update the portion of the phone_number in the employees table, 
+-- within the phone number the substring '124' will be replaced by '999'.
+UPDATE employees
+SET phone_number = REPLACE(phone_number, '124', '999')
+WHERE phone_number LIKE "%124%";
+
+-- 3. Write a query to get the details of the employees where the length of the first name greater than or equal to 8.
+SELECT *
+FROM employees
+GROUP BY LENGTH(first_name) >= 8;
+
+-- 4. Write a query to display leading zeros before maximum and minimum salary
+SELECT job_id,  LPAD( max_salary, 7, '0'), LPAD( min_salary, 7, '0') 
+FROM jobs;
+
+-- 5. Write a query to append '@example.com' to email field.
+SELECT CONCAT(email, '@example.com') 
+FROM employees;
+
+-- 5. Write a query to append '@example.com' to email field.
+UPDATE employees
+SET email = CONCAT(email, '@example.com');
+
+-- 6. Write a query to get the employee id, first name and hire month.
+SELECT employee_id, first_name, MONTH(hire_date) as hire_month FROM employees;
+
+-- 7. Write a query to get the employee id, email id (discard the last three characters).
+SELECT employee_id, SUBSTRING(email, 1, LENGTH(email) - 3), email
+FROM employees;
+--------------------------------------END----------------------------------------------------------------------------------------------------------------------------------------------------------
