@@ -18,7 +18,7 @@ Tickers=["AAPL","GOOG","RY","HPQ", "FB", "T"]
 
 for str in Tickers:
     tickers = str
-    print("INSERT INTO \'ETF\' (\'%s\', %s, \'%s\', %s, %s, %s);" %(tickers,                                                                         # Stock name
+    print("INSERT INTO \'ETF\' (\'%s\', %s, \'%s\', \'%s\', %s, %s);" %(tickers,                                                                         # Stock name
                                                         list_to_str(re.findall("\d+\.\d+", re.sub( "^\d*-\d*-\d*\s+\w*\s+","",
                                                         data.DataReader(tickers, 'yahoo-actions').to_string().split("\n")[1]))),         # Stock dividend
                                                         re.sub("^\w*\s+", "", data.get_quote_yahoo(tickers)['shortName'].to_string()),   # Stock company name
