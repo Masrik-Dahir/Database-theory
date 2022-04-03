@@ -1,4 +1,4 @@
-CREATE TABLE Users  (
+CREATE TABLE Users (
     TIN NUMERIC(9,0),
     first_name VARCHAR(20) NOT NULL,
     last_name VARCHAR(20) NOT NULL,
@@ -13,14 +13,14 @@ CREATE TABLE Users  (
     PRIMARY KEY (TIN)
 )
 
-CREATE TABLE Users _Phone (
+CREATE TABLE Users_Phone (
     TIN NUMERIC(9,0),
     phone_number NUMERIC(10,0) UNIQUE,
     PRIMARY KEY (TIN, phone_number),
     FOREIGN KEY (TIN) REFERENCES Users (TIN)
 )
 
-CREATE TABLE Users _Bank_Account (
+CREATE TABLE Users_Bank_Account (
     TIN NUMERIC(9,0),
     Bank_Account_Number NUMERIC(12,0),
     Routing_Number NUMERIC(9,0),
@@ -28,7 +28,7 @@ CREATE TABLE Users _Bank_Account (
     FOREIGN KEY (TIN) REFERENCES Users (TIN)
 )
 
-CREATE TABLE Users _Transaction (
+CREATE TABLE Users_Transaction (
     TIN NUMERIC(9,0),
     Transaction_Number NUMERIC(12, 0),
     asset_type VARCHAR(15) NOT NULL,
