@@ -50,7 +50,7 @@ CREATE TABLE Brokerage_Account (
     TIN NUMERIC(9,0),
     Account_Number NUMERIC(12,0),
     Account_Routing_Number NUMERIC(9,0),
-    PRIMARY KEY (SSN, TIN, Brokerage_Account_Number, Brokerage_Account_Routing_Number)
+    PRIMARY KEY (SSN, TIN, Brokerage_Account_Number, Brokerage_Account_Routing_Number),
     FOREIGN KEY (SSN) REFERENCES Individual_Investor(SSN),
     FOREIGN KEY (TIN) REFERENCES Brokerage(EIN)
 );
