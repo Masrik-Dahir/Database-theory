@@ -17,7 +17,7 @@ CREATE TABLE Users_Phone (
     TIN NUMERIC(9,0),
     phone_number NUMERIC(10,0) UNIQUE,
     PRIMARY KEY (TIN, phone_number),
-    FOREIGN KEY (TIN) REFERENCES Users (TIN)
+    FOREIGN KEY (TIN) REFERENCES Users(TIN)
 );
 
 CREATE TABLE Users_Bank_Account (
@@ -25,7 +25,7 @@ CREATE TABLE Users_Bank_Account (
     Bank_Account_Number NUMERIC(12,0),
     Routing_Number NUMERIC(9,0),
     PRIMARY KEY (TIN, bank_account_number, routing_number),
-    FOREIGN KEY (TIN) REFERENCES Users (TIN)
+    FOREIGN KEY (TIN) REFERENCES Users(TIN)
 );
 
 CREATE TABLE Users_Transaction (
@@ -33,35 +33,7 @@ CREATE TABLE Users_Transaction (
     Transaction_Number NUMERIC(12, 0),
     asset_type VARCHAR(15) NOT NULL,
     PRIMARY KEY (TIN, Transaction_Number),
-    FOREIGN KEY (TIN) REFERENCES Users (TIN)
-);
-
-CREATE TABLE Brokerage (
-    EIN NUMERIC(9,0),
-    commission_pct FLOAT,
-    license VARCHAR(20),
-    leverage_trading BIT NOT NULL,
-    PRIMARY KEY (EIN),
-    FOREIGN KEY (EIN) REFERENCES Users (TIN)
-);
-
-CREATE TABLE Brokerage_Account (
-    SSN NUMERIC(9,0),
-    TIN NUMERIC(9,0),
-    Account_Number NUMERIC(12,0),
-    Account_Routing_Number NUMERIC(9,0),
-    PRIMARY KEY (SSN, TIN, Brokerage_Account_Number, Brokerage_Account_Routing_Number),
-    FOREIGN KEY (SSN) REFERENCES Individual_Investor(SSN),
-    FOREIGN KEY (TIN) REFERENCES Brokerage(EIN)
-);
-
-CREATE TABLE Bank_Relation (
-    Brokerage_Account_Number NUMERIC(12,0),
-    Brokerage_Account_Routing_Number NUMERIC (9,0),
-    II_Bank_Account_Number NUMERIC(12,0),
-    II_Bank_Account_Routing_Number NUMERIC(9,0),
-    PRIMARY KEY (Brokerage_Account_Number, Brokerage_Account_Routing_Number, II_Bank_Account_Number, II_Bank_Account_Routing_Number),
-    FOREIGN KEY (Brokerage_Account_Number, Brokerage_Account_Routing_Number) REFERENCES Brokerage_Account (Account_Number, Account_Routing_Number)
+    FOREIGN KEY (TIN) REFERENCES Users(TIN)
 );
 
 CREATE TABLE Individual_Investor (
@@ -78,6 +50,36 @@ CREATE TABLE Individual_Investor (
     PRIMARY KEY (SSN)
 );
 
+CREATE TABLE Brokerage (
+    EIN NUMERIC(9,0),
+    commission_pct FLOAT,
+    license VARCHAR(20),
+    leverage_trading BIT NOT NULL,
+    PRIMARY KEY (EIN),
+    FOREIGN KEY (EIN) REFERENCES Users(TIN)
+);
+
+CREATE TABLE Brokerage_Account (
+    SSN NUMERIC(9,0),
+    TIN NUMERIC(9,0),
+    Account_Number NUMERIC(12,0),
+    Account_Routing_Number NUMERIC(9,0),
+    PRIMARY KEY (SSN, TIN, Account_Number, Account_Routing_Number),
+    FOREIGN KEY (SSN) REFERENCES Individual_Investor(SSN),
+    FOREIGN KEY (TIN) REFERENCES Brokerage(EIN)
+);
+
+CREATE INDEX Brokerage_Account_Info ON Brokerage_Account(Account_Number, Account_Routing_Number);
+
+CREATE TABLE Bank_Relation (
+    Brokerage_Account_Number NUMERIC(12,0),
+    Brokerage_Account_Routing_Number NUMERIC (9,0),
+    II_Bank_Account_Number NUMERIC(12,0),
+    II_Bank_Account_Routing_Number NUMERIC(9,0),
+    PRIMARY KEY (Brokerage_Account_Number, Brokerage_Account_Routing_Number, II_Bank_Account_Number, II_Bank_Account_Routing_Number),
+    FOREIGN KEY (Brokerage_Account_Number, Brokerage_Account_Routing_Number) REFERENCES Brokerage_Account(Account_Number, Account_Routing_Number)
+);
+
 CREATE TABLE Individual_Investor_Phone (
     SSN NUMERIC(9,0),
     phone_number NUMERIC(10,0) UNIQUE,
@@ -88,7 +90,7 @@ CREATE TABLE Direct_Investor (
     TIN NUMERIC(9,0),
     public_trading BIT NOT NULL,
     PRIMARY KEY (TIN),
-    FOREIGN KEY (TIN) REFERENCES Users (TIN)
+    FOREIGN KEY (TIN) REFERENCES Users(TIN)
 );
 
 CREATE TABLE Exchange (
@@ -125,7 +127,7 @@ CREATE TABLE ETF_Transaction (
     ETF_Symbol VARCHAR(5) NOT NULL,
     quantity INT NOT NULL,
     PRIMARY KEY (TIN, Transaction_Number),
-    FOREIGN KEY (TIN, Transaction_Number) REFERENCES Users _Transaction(TIN, Transaction_Number),
+    FOREIGN KEY (TIN, Transaction_Number) REFERENCES Users_Transaction(TIN, Transaction_Number),
     FOREIGN KEY (ETF_Symbol) REFERENCES ETF(ETF_Symbol)
 );
 
@@ -139,7 +141,7 @@ CREATE TABLE Exchange_ETFs (
 
 CREATE TABLE Cryptocurrency (
     Cryptocurrency_Symbol VARCHAR(5),
-    total_supply INT NOT NULL
+    total_supply INT NOT NULL,
     current_supply INT NOT NULL,
     unit_price FLOAT NOT NULL,
     cryptocurrency_name VARCHAR(20) NOT NULL,
@@ -152,7 +154,7 @@ CREATE TABLE Cryptocurrency_Transaction (
     Cryptocurrency_Symbol VARCHAR(5) NOT NULL,
     quantity INT NOT NULL,
     PRIMARY KEY (TIN, Transaction_Number),
-    FOREIGN KEY (TIN, Transaction_Number) REFERENCES Users _Transaction(TIN, Transaction_Number),
+    FOREIGN KEY (TIN, Transaction_Number) REFERENCES Users_Transaction(TIN, Transaction_Number),
     FOREIGN KEY (Cryptocurrency_Symbol) REFERENCES Cryptocurrency(Cryptocurrency_Symbol)
 );
 
@@ -180,7 +182,7 @@ CREATE TABLE Mutual_Fund_Transaction (
     Mutual_Fund_Symbol VARCHAR(5) NOT NULL,
     quantity INT NOT NULL,
     PRIMARY KEY (TIN, Transaction_Number),
-    FOREIGN KEY (TIN, Transaction_Number) REFERENCES Users _Transaction(TIN, Transaction_Number),
+    FOREIGN KEY (TIN, Transaction_Number) REFERENCES Users_Transaction(TIN, Transaction_Number),
     FOREIGN KEY (Mutual_Fund_Symbol) REFERENCES Mutual_Fund(Mutual_Fund_Symbol)
 );
 
@@ -208,7 +210,7 @@ CREATE TABLE Options_Transaction (
     Option_Symbol VARCHAR(5) NOT NULL,
     quantity INT NOT NULL,
     PRIMARY KEY (TIN, Transaction_Number),
-    FOREIGN KEY (TIN, Transaction_Number) REFERENCES Users _Transaction(TIN, Transaction_Number),
+    FOREIGN KEY (TIN, Transaction_Number) REFERENCES Users_Transaction(TIN, Transaction_Number),
     FOREIGN KEY (Option_Symbol) REFERENCES Options(Option_Symbol)
 );
 
