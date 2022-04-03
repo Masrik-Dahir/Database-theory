@@ -137,7 +137,7 @@ CREATE TABLE Exchange_ETFs (
     PRIMARY KEY (Market_Identifier_Code, ETF_Symbol),
     FOREIGN KEY (Market_Identifier_Code) REFERENCES Exchange(Market_Identifier_Code),
     FOREIGN KEY (ETF_Symbol) REFERENCES ETF(ETF_Symbol)
-)
+);
 
 CREATE TABLE Cryptocurrency (
     Cryptocurrency_Symbol VARCHAR(5),
