@@ -111,7 +111,7 @@ CREATE TABLE Exchange_Index (
 CREATE TABLE ETF (
     ETF_Symbol VARCHAR(5),
     dividend FLOAT NOT NULL,
-    company VARCHAR(20) NOT NULL,
+    company VARCHAR(255) NOT NULL,
     unit_price FLOAT NOT NULL,
     number_of_shares INT NOT NULL,
     market_cap INT NOT NULL,
@@ -141,7 +141,7 @@ CREATE TABLE Cryptocurrency (
     total_supply INT NOT NULL,
     current_supply INT NOT NULL,
     unit_price FLOAT NOT NULL,
-    cryptocurrency_name VARCHAR(20) NOT NULL,
+    cryptocurrency_name VARCHAR(255) NOT NULL,
     PRIMARY KEY (Cryptocurrency_Symbol)
 );
 
@@ -168,7 +168,7 @@ CREATE TABLE Mutual_Fund (
     dividend FLOAT NOT NULL,
     unit_price FLOAT NOT NULL,
     asset_class VARCHAR(10) NOT NULL,
-    fund_name VARCHAR(20) NOT NULL,
+    fund_name VARCHAR(255) NOT NULL,
     net_asset_value FLOAT NOT NULL,
     PRIMARY KEY (Mutual_Fund_Symbol)
 );
@@ -193,18 +193,18 @@ CREATE TABLE Exchange_Mutual_Funds (
 
 
 CREATE TABLE Options (
-    Option_Symbol VARCHAR(5),
+    Option_Symbol VARCHAR(8),
     expiration_date DATE NOT NULL,
     strike_price FLOAT NOT NULL,
-    asset_class VARCHAR(10) NOT NULL,
-    company_name VARCHAR(20) NOT NULL,
+    asset_class VARCHAR(255) NOT NULL,
+    stock_symbol VARCHAR(5) NOT NULL,
     PRIMARY KEY (Option_Symbol)
 );
 
 CREATE TABLE Options_Transaction (
     TIN NUMERIC(9,0),
     Transaction_Number NUMERIC(12,0),
-    Option_Symbol VARCHAR(5) NOT NULL,
+    Option_Symbol VARCHAR(8) NOT NULL,
     quantity INT NOT NULL,
     PRIMARY KEY (TIN, Transaction_Number),
     FOREIGN KEY (TIN, Transaction_Number) REFERENCES Users_Transaction(TIN, Transaction_Number),
@@ -213,7 +213,7 @@ CREATE TABLE Options_Transaction (
 
 CREATE TABLE Exchange_Options (
     Market_Identifier_Code VARCHAR(10),
-    Option_Symbol VARCHAR(5),
+    Option_Symbol VARCHAR(8),
     PRIMARY KEY (Market_Identifier_Code, Option_Symbol),
     FOREIGN KEY (Market_Identifier_Code) REFERENCES Exchange(Market_Identifier_Code),
     FOREIGN KEY (Option_Symbol) REFERENCES Options(Option_Symbol)

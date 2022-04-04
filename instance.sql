@@ -32,7 +32,8 @@ INSERT INTO Users_Transaction VALUES
 (133963293, 216811147728, "Option"),
 (133963293, 215796003877, "Mutual Fund")
 (821664890, 390629840269, "Cryptocurrency"),
-(821664890, 499737848193, "Cryptocurrency")
+(821664890, 499737848193, "Cryptocurrency"),
+(942404110, 671238532132, "ETF")
 ;
 
 
@@ -95,15 +96,40 @@ INSERT INTO Exchange_Index VALUES
 ("NYSE", "NYA"),
 ("NASDAQ", "COMP");
 
-INSERT INTO ETF VALUES ;
+--stocks numbered by thousands, market cap numbered in millions
+INSERT INTO ETF VALUES 
+('CCL', 0.50, 'Carnival Corporation & plc', 20.05, 981048, 23373),
+('AAPL', 0.2200, 'Apple Inc.', 174.31, 16406400, 2859799),
+('GOOG', 0, 'Alphabet Inc.', 2814.0, 317737, 1867716),
+('RY', 1.200, 'Royal Bank of Canada', 109.74, 1424669, 156343),
+('HPQ', 0.2500, 'HP Inc.', 35.6, 1082720, 38544),
+('FB', 0, 'Meta Platforms, Inc.', 224.85, 2366279, 625478),
+('T', 0.52, 'AT&T Inc.', 23.98, 7141000, 171241),
+('AA', 0.1, 'Alcoa Corporation', 90.62, 187103, 16955),
+('TSLA', 0.2, 'Tesla, Inc.', 1084.59, 1004259, 1089210),
+('SM', 0.01, 'SM Energy Company', 41.01, 121474, 4981),
+('CAG', 0.3125, 'Conagra Brands, Inc.', 34.08, 479689, 16347),
+('STOR', 0.385, 'STORE Capital Corporation', 29.57, 272715, 8064),
+('TSM', 0.495978, 'Taiwan Semiconductor Manufacturing Company Lim...', 102.79, 5186079, 533077),
+('EMBK', 0, 'Embark Technology, Inc.', 6.14, 362473, 2760),
+('SPCE', 0, 'Virgin Galactic Holdings, Inc.', 9.99, 258011, 2577),
+('AMZN', 0, 'Amazon.com, Inc.', 3271.2, 507148, 1658982),
+('USB', 0.46, 'U.S. Bancorp', 52.9, 1482800, 78440),
+('VEON', 0.15, 'VEON Ltd.', 0.7339, 1749129, 1283);
 
-INSERT INTO ETF_Transaction VALUES ;
+INSERT INTO ETF_Transaction VALUES 
+(941737782, 292743994121, "TSLA", 100),
+(133963293, 427330228709, "AMZN", 150),
+(942404110, 671238532132, "GOOG", 300);
 
 INSERT INTO Exchange_ETFs VALUES 
+("NYSE")
 
 INSERT INTO Cryptocurrency VALUES ;
 
-INSERT INTO Cryptocurrency_Transaction VALUES ;
+INSERT INTO Cryptocurrency_Transaction VALUES 
+(821664890, 390629840269, "BTC", 50),
+(821664890, 499737848193, "ETH", 100);
 
 INSERT INTO Exchange_Cryptocurrencies VALUES ;
 
