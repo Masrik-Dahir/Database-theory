@@ -137,9 +137,9 @@ CREATE TABLE Exchange_ETFs (
 );
 
 CREATE TABLE Cryptocurrency (
-    Cryptocurrency_Symbol VARCHAR(5),
-    total_supply INT NOT NULL,
-    market_cap INT NOT NULL,
+    Cryptocurrency_Symbol VARCHAR(10),
+    total_supply LONG INT NOT NULL,
+    market_cap DOUBLE NOT NULL,
     unit_price FLOAT NOT NULL,
     cryptocurrency_name VARCHAR(255) NOT NULL,
     PRIMARY KEY (Cryptocurrency_Symbol)

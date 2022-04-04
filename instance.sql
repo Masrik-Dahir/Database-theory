@@ -88,11 +88,12 @@ INSERT INTO Direct_Investor VALUES
 (942404110, 1),
 (911144442, 1);
 
---number of securities is simply an approximation
+--number of securities is simply an approximation, market cap in billions
 INSERT INTO Exchange (Market_Identifier_Code, currency, number_of_securities, market_cap, date_founded) VALUES 
 ("NYSE", "US Dollars", 2800, 1848, '1792-05-17'),
 ("NASDAQ", "US Dollars", 3300, 2818, '1971-02-08'),
-("CRYPTO.COM", "US Dollars", 3000, 2, '2016-01-01');
+("CRYPTO.COM", "US Dollars", 192, 2)
+("BINANCE", "US Dollars", 395, 19);
 
 INSERT INTO Exchange_Index VALUES 
 ("NYSE", "NYA"),
@@ -148,13 +149,33 @@ INSERT INTO Exchange_ETFs VALUES
 ('NASDAQ', 'VEON')
 ;
 
-INSERT INTO Cryptocurrency VALUES ;
+INSERT INTO Cryptocurrency VALUES 
+('BTC-USD', 21000000 , 871628086435.15, 45919.18,'Bitcoin'),
+('ETH-USD', 120233136, 419481361972.28, 3491.663,'Etherium'),
+('ADA-USD', 34277702082, 39641550753.91, 1.176328,'Cardano'),
+('SOL-USD', 511616946, 44170975798.95, 135.78896,'Solana'),
+('ALGO-USD', 6638312944, 6060035716.63, 0.913389,'Algorand'),
+('LUNA-USD', 353093076, 40556576561.13, 114.64,'Terra')
+;
 
 INSERT INTO Cryptocurrency_Transaction VALUES 
-(821664890, 390629840269, "BTC", 50),
-(821664890, 499737848193, "ETH", 100);
+(821664890, 390629840269, "BTC-USD", 50),
+(821664890, 499737848193, "ETH-USD", 100);
 
-INSERT INTO Exchange_Cryptocurrencies VALUES ;
+INSERT INTO Exchange_Cryptocurrencies VALUES 
+("CRYPTO.COM", 'BTC-USD'),
+("BINANCE", 'BTC-USD'),
+("CRYPTO.COM", 'ETH-USD'),
+("BINANCE", 'ETH-USD'),
+("CRYPTO.COM", 'ADA-USD'),
+("BINANCE", 'ADA-USD'),
+("CRYPTO.COM", 'SOL-USD'),
+("BINANCE", 'SOL-USD'),
+("CRYPTO.COM", 'ALGO-USD'),
+("BINANCE", 'ALGO-USD'),
+("CRYPTO.COM", 'LUNA-USD'),
+("BINANCE", 'LUNA-USD')
+;
 
 --Net Asset Value in Millions
 INSERT INTO Mutual_Fund VALUES 
@@ -175,7 +196,8 @@ INSERT INTO Exchange_Mutual_Funds VALUES
 ('NYSE', 'SPY'),
 ('NASDAQ', 'SPY'),
 ('NASDAQ', 'VTSAX'),
-
+('NYSE', 'PLD'),
+('NASDAQ', 'GCCIX')
 ;
 
 INSERT INTO Options VALUES 
