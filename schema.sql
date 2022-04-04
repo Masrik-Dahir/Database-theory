@@ -2,7 +2,7 @@ CREATE TABLE Users (
     TIN NUMERIC(9,0),
     investor_name VARCHAR(40) NOT NULL,
     email_address VARCHAR(40) NOT NULL UNIQUE,
-    street_address VARCHAR(20) NOT NULL,
+    street_address VARCHAR(50) NOT NULL,
     city VARCHAR(20) NOT NULL,
     state_abbr CHAR(2),
     zip_code NUMERIC(5, 0),
@@ -148,7 +148,7 @@ CREATE TABLE Cryptocurrency (
 CREATE TABLE Cryptocurrency_Transaction (
     TIN NUMERIC(9,0),
     Transaction_Number NUMERIC(12,0),
-    Cryptocurrency_Symbol VARCHAR(5) NOT NULL,
+    Cryptocurrency_Symbol VARCHAR(10) NOT NULL,
     quantity INT NOT NULL,
     PRIMARY KEY (TIN, Transaction_Number),
     FOREIGN KEY (TIN, Transaction_Number) REFERENCES Users_Transaction(TIN, Transaction_Number),
@@ -157,7 +157,7 @@ CREATE TABLE Cryptocurrency_Transaction (
 
 CREATE TABLE Exchange_Cryptocurrencies (
     Market_Identifier_Code VARCHAR(10),
-    Cryptocurrency_Symbol VARCHAR(5),
+    Cryptocurrency_Symbol VARCHAR(10),
     PRIMARY KEY (Market_Identifier_Code, Cryptocurrency_Symbol),
     FOREIGN KEY (Market_Identifier_Code) REFERENCES Exchange(Market_Identifier_Code),
     FOREIGN KEY (Cryptocurrency_Symbol) REFERENCES Cryptocurrency(Cryptocurrency_Symbol)
@@ -167,7 +167,7 @@ CREATE TABLE Mutual_Fund (
     Mutual_Fund_Symbol VARCHAR(5),
     dividend FLOAT NOT NULL,
     unit_price FLOAT NOT NULL,
-    asset_class VARCHAR(10) NOT NULL,
+    asset_class VARCHAR(255) NOT NULL,
     fund_name VARCHAR(255) NOT NULL,
     net_asset_value INT NOT NULL,
     PRIMARY KEY (Mutual_Fund_Symbol)
@@ -194,7 +194,7 @@ CREATE TABLE Exchange_Mutual_Funds (
 
 CREATE TABLE Options (
     Option_Symbol VARCHAR(8),
-    expiration_date DATETIME NOT NULL,
+    expiration_date DATE NOT NULL,
     strike_price FLOAT NOT NULL,
     asset_class VARCHAR(255) NOT NULL,
     stock_symbol VARCHAR(5) NOT NULL,
