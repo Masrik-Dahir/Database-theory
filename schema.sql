@@ -91,7 +91,7 @@ CREATE TABLE Direct_Investor (
 );
 
 CREATE TABLE Exchange (
-    Market_Identifier_Code CHAR(10),
+    Market_Identifier_Code VARCHAR(10),
     CEO VARCHAR(40),
     currency VARCHAR(10) NOT NULL,
     number_of_securities INT NOT NULL,
