@@ -115,6 +115,7 @@ CREATE TABLE ETF (
     unit_price FLOAT NOT NULL,
     etf_name VARCHAR(30) NOT NULL,
     number_of_shares INT NOT NULL,
+    market_cap INT NOT NULL,
     PRIMARY KEY (ETF_Symbol)
 );
 
