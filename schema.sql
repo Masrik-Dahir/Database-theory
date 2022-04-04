@@ -1,11 +1,9 @@
 CREATE TABLE Users (
     TIN NUMERIC(9,0),
-    first_name VARCHAR(20) NOT NULL,
-    last_name VARCHAR(20) NOT NULL,
+    investor_name VARCHAR(40) NOT NULL,
     email_address VARCHAR(40) NOT NULL UNIQUE,
     street_address VARCHAR(20) NOT NULL,
     city VARCHAR(20) NOT NULL,
-    county VARCHAR(20) NOT NULL,
     state_abbr CHAR(2),
     zip_code NUMERIC(5, 0),
     date_of_birth DATE NOT NULL,
@@ -43,7 +41,6 @@ CREATE TABLE Individual_Investor (
     email_address VARCHAR(40) NOT NULL UNIQUE,
     street_address VARCHAR(20) NOT NULL,
     city VARCHAR(20) NOT NULL,
-    county VARCHAR(20) NOT NULL,
     state_abbr CHAR(2) NOT NULL,
     zip_code NUMERIC(5, 0),
     date_of_birth DATE NOT NULL,
@@ -52,7 +49,7 @@ CREATE TABLE Individual_Investor (
 
 CREATE TABLE Brokerage (
     EIN NUMERIC(9,0),
-    commission_pct FLOAT,
+    commission FLOAT,
     license VARCHAR(20),
     leverage_trading BIT NOT NULL,
     PRIMARY KEY (EIN),
@@ -94,7 +91,7 @@ CREATE TABLE Direct_Investor (
 );
 
 CREATE TABLE Exchange (
-    Market_Identifier_Code CHAR(4),
+    Market_Identifier_Code CHAR(10),
     CEO VARCHAR(40),
     currency VARCHAR(10) NOT NULL,
     number_of_securities INT NOT NULL,
@@ -105,7 +102,7 @@ CREATE TABLE Exchange (
 );
 
 CREATE TABLE Exchange_Index (
-    Market_Identifier_Code CHAR(4),
+    Market_Identifier_Code CHAR(10),
     Market_Index VARCHAR(10),
     PRIMARY KEY (Market_Identifier_Code, Market_Index),
     FOREIGN KEY (Market_Identifier_Code) REFERENCES Exchange(Market_Identifier_Code)
@@ -132,7 +129,7 @@ CREATE TABLE ETF_Transaction (
 );
 
 CREATE TABLE Exchange_ETFs (
-    Market_Identifier_Code VARCHAR(4),
+    Market_Identifier_Code VARCHAR(10),
     ETF_Symbol VARCHAR(5),
     PRIMARY KEY (Market_Identifier_Code, ETF_Symbol),
     FOREIGN KEY (Market_Identifier_Code) REFERENCES Exchange(Market_Identifier_Code),
@@ -159,7 +156,7 @@ CREATE TABLE Cryptocurrency_Transaction (
 );
 
 CREATE TABLE Exchange_Cryptocurrencies (
-    Market_Identifier_Code VARCHAR(4),
+    Market_Identifier_Code VARCHAR(10),
     Cryptocurrency_Symbol VARCHAR(5),
     PRIMARY KEY (Market_Identifier_Code, Cryptocurrency_Symbol),
     FOREIGN KEY (Market_Identifier_Code) REFERENCES Exchange(Market_Identifier_Code),
@@ -187,7 +184,7 @@ CREATE TABLE Mutual_Fund_Transaction (
 );
 
 CREATE TABLE Exchange_Mutual_Funds (
-    Market_Identifier_Code VARCHAR(4),
+    Market_Identifier_Code VARCHAR(10),
     Mutual_Fund_Symbol VARCHAR(5),
     PRIMARY KEY (Market_Identifier_Code, Mutual_Fund_Symbol),
     FOREIGN KEY (Market_Identifier_Code) REFERENCES Exchange(Market_Identifier_Code),
@@ -215,7 +212,7 @@ CREATE TABLE Options_Transaction (
 );
 
 CREATE TABLE Exchange_Options (
-    Market_Identifier_Code VARCHAR(4),
+    Market_Identifier_Code VARCHAR(10),
     Option_Symbol VARCHAR(5),
     PRIMARY KEY (Market_Identifier_Code, Option_Symbol),
     FOREIGN KEY (Market_Identifier_Code) REFERENCES Exchange(Market_Identifier_Code),
