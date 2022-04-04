@@ -3,7 +3,7 @@ INSERT INTO Users VALUES --emails and dates are all bogus
 (821664890, "Webull Financial Llc", "webull@bogusemail.com", "44 Wall St, Suite 501", "New York", "NY", 10005, '2010-11-12', "BK"),
 (942404110, "Apple Inc.", "apple@appleemail.com", "One Apple Park Way", "Cupertino", "CA", 95014, '1960-12-25', "DI"),
 (911144442, "Microsoft Corp.", "microsoft@hotmail.com", "One Microsoft Way", "Redmond", "WA", 98052, '1980-02-15', "DI"),
-(133963293, "JP Morgan Fleming Mutual Fund Group Inc.", "277 Park Avenue", "New York", "NY", 10172, '1820-06-30', "BK")
+(133963293, "JP Morgan Fleming Mutual Fund Group Inc.", "jpmorgan@email.com", "277 Park Avenue", "New York", "NY", 10172, '1820-06-30', "BK")
 ;
 
 INSERT INTO Users_Phone VALUES 
@@ -79,9 +79,10 @@ INSERT INTO Direct_Investor VALUES
 (911144442, 1);
 
 --number of securities is simply an approximation
-INSERT INTO Exchange VALUES (Market_Identifier_Code, currency, number_of_securities, market_cap, date_founded)
+INSERT INTO Exchange (Market_Identifier_Code, currency, number_of_securities, market_cap, date_founded) VALUES 
 ("NYSE", "US Dollars", 2800, 1848, '1792-05-17'),
-("NASDAQ", "US Dollars", 3300, 2818, '1971-02-08');
+("NASDAQ", "US Dollars", 3300, 2818, '1971-02-08'),
+("CRYPTO.COM", "US Dollars", 3000, 2, '2016-01-01');
 
 INSERT INTO Exchange_Index VALUES 
 ("NYSE", "NYA"),
@@ -91,7 +92,7 @@ INSERT INTO ETF VALUES ;
 
 INSERT INTO ETF_Transaction VALUES ;
 
-INSERT INTO Exchange_ETFs VALUES ;
+INSERT INTO Exchange_ETFs VALUES 
 
 INSERT INTO Cryptocurrency VALUES ;
 
