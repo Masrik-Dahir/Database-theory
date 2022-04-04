@@ -12,7 +12,7 @@ def clean(i):
     return re.sub("^\w*\s+", "", i)
 
 def query():
-    Tickers=["AAPL","GOOG","RY","HPQ", "FB", "T"]
+    Tickers=["CCL", "AAPL","GOOG","RY","HPQ", "FB", "T", "AA", "TSLA", "SM", "CAG", "STOR", "TSM", "EMBK", "SPCE", "AMZN", "USB", "RY", "VEON" ]
     for str in Tickers:
         tickers = str
         print("INSERT INTO \'ETF\' (\'%s\', %s, \'%s\', \'%s\', %s, %s);"
