@@ -139,7 +139,7 @@ CREATE TABLE Exchange_ETFs (
 CREATE TABLE Cryptocurrency (
     Cryptocurrency_Symbol VARCHAR(5),
     total_supply INT NOT NULL,
-    current_supply INT NOT NULL,
+    market_cap INT NOT NULL,
     unit_price FLOAT NOT NULL,
     cryptocurrency_name VARCHAR(255) NOT NULL,
     PRIMARY KEY (Cryptocurrency_Symbol)
@@ -169,7 +169,7 @@ CREATE TABLE Mutual_Fund (
     unit_price FLOAT NOT NULL,
     asset_class VARCHAR(10) NOT NULL,
     fund_name VARCHAR(255) NOT NULL,
-    net_asset_value FLOAT NOT NULL,
+    net_asset_value INT NOT NULL,
     PRIMARY KEY (Mutual_Fund_Symbol)
 );
 
@@ -194,7 +194,7 @@ CREATE TABLE Exchange_Mutual_Funds (
 
 CREATE TABLE Options (
     Option_Symbol VARCHAR(8),
-    expiration_date DATE NOT NULL,
+    expiration_date DATETIME NOT NULL,
     strike_price FLOAT NOT NULL,
     asset_class VARCHAR(255) NOT NULL,
     stock_symbol VARCHAR(5) NOT NULL,

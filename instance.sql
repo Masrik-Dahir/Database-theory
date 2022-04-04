@@ -34,7 +34,8 @@ INSERT INTO Users_Transaction VALUES
 (821664890, 390629840269, "Cryptocurrency"),
 (821664890, 499737848193, "Cryptocurrency"),
 (942404110, 671238532132, "ETF"),
-(941737782, 851701468945, "ETF")
+(941737782, 851701468945, "ETF"),
+(942404110, 553958317259, "Option")
 ;
 
 
@@ -116,7 +117,9 @@ INSERT INTO ETF VALUES
 ('SPCE', 0, 'Virgin Galactic Holdings, Inc.', 9.99, 258011, 2577),
 ('AMZN', 0, 'Amazon.com, Inc.', 3271.2, 507148, 1658982),
 ('USB', 0.46, 'U.S. Bancorp', 52.9, 1482800, 78440),
-('VEON', 0.15, 'VEON Ltd.', 0.7339, 1749129, 1283);
+('VEON', 0.15, 'VEON Ltd.', 0.7339, 1749129, 1283),
+('AAC', 0, 'Ares Acquisition Corporation', 9.8, 100000, 1470)
+;
 
 INSERT INTO ETF_Transaction VALUES 
 (941737782, 292743994121, "TSLA", 100),
@@ -142,7 +145,8 @@ INSERT INTO Exchange_ETFs VALUES
 ('NASDAQ', 'SPCE'),
 ('NASDAQ', 'AMZN'),
 ('NASDAQ', 'USB'),
-('NASDAQ', 'VEON');
+('NASDAQ', 'VEON')
+;
 
 INSERT INTO Cryptocurrency VALUES ;
 
@@ -152,14 +156,46 @@ INSERT INTO Cryptocurrency_Transaction VALUES
 
 INSERT INTO Exchange_Cryptocurrencies VALUES ;
 
-INSERT INTO Mutual_Fund VALUES ;
+--Net Asset Value in Millions
+INSERT INTO Mutual_Fund VALUES 
+('VSMPX', 0.652, 208.71, 'stocks', 'Vanguard Total Stock Market Index Fund Institu...', 1767408),
+('SPY', 1.366, 452.92, 'stocks', 'SPDR S&P 500 ETF Trust', 415681),
+('VTSAX', 0.342, 111.28, 'stocks', 'Vanguard Total Stock Market Index Fund Admiral...', 942346)
+('PLD', 0.79, 165.8, 'real estate', 'Prologis, Inc.', 122722),
+('GCCIX', 1.488, 11.49, 'real estate', 'Goldman Sachs Commodity Strategy Fund Institut...', 100)
+;
 
-INSERT INTO Mutual_Fund_Transaction VALUES ;
+INSERT INTO Mutual_Fund_Transaction VALUES 
+(941737782, 595283550234, 'SPY', 500)
+(133963293, 215796003877, 'GCCIX', 126) 
+;
 
-INSERT INTO Exchange_Mutual_Funds VALUES ;
+INSERT INTO Exchange_Mutual_Funds VALUES 
+('NASDAQ', 'VSMPX')
+('NYSE', 'SPY'),
+('NASDAQ', 'SPY'),
+('NASDAQ', 'VTSAX'),
 
-INSERT INTO Options VALUES ;
+;
 
-INSERT INTO Options_Transaction VALUES ;
+INSERT INTO Options VALUES 
+('0155INZ0', '06/14/2021 05:29 AM', 20.05, 'Equity', 'CCL'),
+('FAWNDUWZ', '12/26/2021 03:06 PM', 174.31, 'Equity', 'AAPL'),
+('T7V5MR1R', '02/09/2022 12:38 AM', 2814.0, 'Equity', 'GOOG'),
+('JWCIHX6H', '06/19/2021 07:16 AM', 109.74, 'Equity', 'RY'),
+('3KJLS065', '09/30/2021 06:34 PM', 35.6, 'Equity', 'HPQ'),
+('NLCBF0J4', '09/08/2021 08:34 PM', 98.7, 'Commodity', 'CL=F')
+;
 
-INSERT INTO Exchange_Options VALUES ;
+INSERT INTO Options_Transaction VALUES 
+(133963293, 216811147728, 'CCL', 250), 
+(942404110, 553958317259, 'GOOG', 120)
+;
+
+INSERT INTO Exchange_Options VALUES 
+('NASDAQ', '0155INZ0'),
+('NASDAQ', 'FAWNDUWZ'),
+('NASDAQ', 'T7V5MR1R'),
+('NASDAQ', 'JWCIHX6H'),
+('NASDAQ', '3KJLS065'),
+('NASDAQ', 'NLCBF0J4');
