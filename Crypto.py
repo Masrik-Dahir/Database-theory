@@ -12,18 +12,20 @@ def clean(i):
     return re.sub("^\w*\s+", "", i)
 
 def query():
-    Tickers=["AAC" ]
+    Tickers=["CCL", "AAPL","GOOG","RY","HPQ", "FB", "T", "AA", "TSLA", "SM", "CAG", "STOR", "TSM", "EMBK", "SPCE", "AMZN", "USB", "RY", "VEON" ]
     for str in Tickers:
         tickers = str
         print("INSERT INTO \'ETF\' (\'%s\', %s, \'%s\', %s, %s, %s);"
 
                                                         %(
                                                             tickers,                                                                        # Stock name
-                                                            list_to_str(re.findall("\d+\.\d+", re.sub( "^\d*-\d*-\d*\s+\w*\s+","",
-                                                            data.DataReader(tickers, 'yahoo-actions').to_string().split("\n")[1]))),        # Stock dividend
-                                                            clean(data.get_quote_yahoo(tickers)['longName'].to_string()),                   # Stock company name
-                                                            clean(data.get_quote_yahoo(tickers)['price'].to_string()),                      # value
                                                             clean(data.get_quote_yahoo(tickers)['sharesOutstanding'].to_string()),          # sharesOutstanding
+                                                            clean(data.get_quote_yahoo(tickers)[
+                                                                      'sharesOutstanding'].to_string()),                                      # sharesOutstanding
+                                                            clean(data.get_quote_yahoo(tickers)['price'].to_string()),                       # value
+                                                            clean(data.get_quote_yahoo(tickers)['longName'].to_string()),                   # Stock company name
+
+
                                                             clean(data.get_quote_yahoo(tickers)['marketCap'].to_string())                   # marketCap
 
                                                         ))

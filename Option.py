@@ -16,19 +16,17 @@ def clean(i):
     return re.sub("^\w*\s+", "", i)
 
 def query():
-    Tickers=["CCL", "AAPL","GOOG","RY","HPQ", "FB", "T", "AA", "TSLA", "SM", "CAG", "STOR", "TSM", "EMBK", "SPCE", "AMZN", "USB", "RY", "VEON" ]
+    Tickers=["CCL", "AAPL","GOOG","RY","HPQ", "CL=F", ]
     for str in Tickers:
         tickers = str
-        print("INSERT INTO \'Options\' (\'%s\', %s, \'%s\', %s, %s, %s);"
+        print("INSERT INTO \'Options\' (\'%s\', \'%s\', %s, \'%s\', \'%s\');"
 
                                                         %(
                                                             random_id(),                                                                        # Option Symbol
-                                                            random_date,                                                                        # Expiration Date
-                                                            clean(data.get_quote_yahoo(tickers)['longName'].to_string()),                       # Stock company name
-                                                            clean(data.get_quote_yahoo(tickers)['price'].to_string()),                          # value
-                                                            clean(data.get_quote_yahoo(tickers)['sharesOutstanding'].to_string()),              # sharesOutstanding
-                                                            clean(data.get_quote_yahoo(tickers)['marketCap'].to_string())                       # marketCap
-
+                                                            random_date("4/3/2022 9:30 PM", "5/1/2021 5:00 AM", random.random()),                                                                        # Expiration Date
+                                                            clean(data.get_quote_yahoo(tickers)['price'].to_string()),                       # Stock company name
+                                                            "Equity",                          # value
+                                                            tickers              # sharesOutstanding
                                                         ))
 
 
@@ -60,3 +58,4 @@ def random_date(start, end, prop):
 # print(random_date("1/1/2008 9:30 PM", "1/1/2009 5:00 AM", random.random()))
 
 # print(random_id())
+query()
