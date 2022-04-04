@@ -113,7 +113,6 @@ CREATE TABLE ETF (
     dividend FLOAT NOT NULL,
     company VARCHAR(20) NOT NULL,
     unit_price FLOAT NOT NULL,
-    etf_name VARCHAR(30) NOT NULL,
     number_of_shares INT NOT NULL,
     market_cap INT NOT NULL,
     PRIMARY KEY (ETF_Symbol)
