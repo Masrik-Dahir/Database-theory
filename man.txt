@@ -1,0 +1,4 @@
+ALL declarations of variables MUST happen together at the beginning
+
+declarations must follow a certain order. Cursor declarations must 
+appear before handler declarations. Variable and condition declarations 
