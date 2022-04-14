@@ -45,6 +45,6 @@ DELIMITER ;
 
 -- Create a function to return the median salary for a department_id 
 -- provided as input parameter.
-
+-- DELIMETER
 
  
